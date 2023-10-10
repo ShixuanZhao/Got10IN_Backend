@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class CollegeRankingResponse {
+    private int ranking;
     private String collegeNames;
 }

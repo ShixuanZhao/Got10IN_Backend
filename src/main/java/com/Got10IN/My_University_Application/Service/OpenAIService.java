@@ -1,6 +1,5 @@
 package com.Got10IN.My_University_Application.Service;
 
-import com.Got10IN.My_University_Application.Entity.CollegeRankingResponse;
 import com.Got10IN.My_University_Application.Entity.OpenAIRequest;
 import com.Got10IN.My_University_Application.Entity.OpenAIResponse;
 import com.Got10IN.My_University_Application.Entity.UserPreferences;
@@ -21,7 +20,7 @@ public class OpenAIService {
     @Value("${endpoint}")
     private String openAIEndpoint;
 
-    public CollegeRankingResponse getCollegeRankings(UserPreferences preferences) {
+    public String getCollegeRankings(UserPreferences preferences) {
         // Construct the request headers with your OpenAI API key
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -78,9 +77,7 @@ public class OpenAIService {
             // Parse the response and extract the college rankings
             OpenAIResponse response = responseEntity.getBody();
             String collegeNames = response.getChoices().get(0).text;
-            CollegeRankingResponse collegeRankingResponse = new CollegeRankingResponse();
-            collegeRankingResponse.setCollegeNames(collegeNames);
-            return collegeRankingResponse;
+            return collegeNames;
         } else {
             // Handle the error appropriately based on your application's requirements
             throw new RuntimeException("Error communicating with OpenAI API");
